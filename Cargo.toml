@@ -1,7 +1,11 @@
 [package]
 name = "hasher"
+authors = ["Elypha <i@elypha.com>"]
+homepage = "https://github.com/Elypha/hasher"
+license = "GPL-3.0-or-later"
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.87.0"
 
 [dependencies]
 bytesize = "2.0.1"
