@@ -1,4 +1,5 @@
 use crate::data;
+use crate::utils::helper::ToStringNormalised;
 use std::io;
 use std::path::PathBuf;
 use xxhash_rust::xxh3::xxh3_64;
@@ -17,8 +18,7 @@ pub fn size(path: &PathBuf, cwd: &PathBuf) -> io::Result<HashResult> {
     let relative_path = path
         .strip_prefix(cwd)
         .unwrap_or(path)
-        .to_string_lossy()
-        .to_string();
+        .to_string_normalised();
     let file_length = path.metadata()?.len();
     Ok(HashResult {
         action: data::enums::UserAction::Size,
@@ -31,8 +31,7 @@ pub fn xxh3(path: &PathBuf, cwd: &PathBuf) -> io::Result<HashResult> {
     let relative_path = path
         .strip_prefix(cwd)
         .unwrap_or(path)
-        .to_string_lossy()
-        .to_string();
+        .to_string_normalised();
     let file_bytes = std::fs::read(path)?;
     let hash = xxh3_64(&file_bytes);
     Ok(HashResult {

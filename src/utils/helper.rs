@@ -4,8 +4,32 @@ use glob::glob;
 use regex::Regex;
 use std::fs::File;
 use std::io::Write;
+use std::path::Path;
 use std::path::PathBuf;
 use std::str::FromStr;
+
+pub trait ToStringNormalised {
+    fn to_string_normalised(&self) -> String;
+}
+
+impl ToStringNormalised for PathBuf {
+    fn to_string_normalised(&self) -> String {
+        // always uses `/` instead of `\`
+        self.to_string_lossy().replace("\\", "/")
+    }
+}
+impl ToStringNormalised for Path {
+    fn to_string_normalised(&self) -> String {
+        // always uses `/` instead of `\`
+        self.to_string_lossy().replace("\\", "/")
+    }
+}
+impl ToStringNormalised for std::ffi::os_str::OsStr {
+    fn to_string_normalised(&self) -> String {
+        // always uses `/` instead of `\`
+        self.to_string_lossy().replace("\\", "/")
+    }
+}
 
 pub fn get_all_local_files(path: &PathBuf) -> Vec<PathBuf> {
     match glob(&path.join("**/*").to_string_lossy()) {

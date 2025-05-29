@@ -3,6 +3,7 @@ use clap::Parser;
 use regex::Regex;
 use std::env;
 use std::path::PathBuf;
+use utils::helper::ToStringNormalised;
 
 mod data {
     pub mod enums;
@@ -18,9 +19,12 @@ mod tasks {
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Cli {
+    /// The action to perform. Valid values are: size, xxh3, check
     action: String,
+    /// The path to the directory to process. If not provided, the current working directory is used.
     path: Option<PathBuf>,
 
+    /// A list of regex patterns to exclude files from processing. Can be specified multiple times and evaluated to true if any pattern matches.
     #[arg(short, long)]
     exclude: Option<Vec<PathBuf>>,
     // #[arg(short, long)]
@@ -68,7 +72,11 @@ fn main() {
                 .collect();
             files_all
                 .into_iter()
-                .filter(|x| !regexes.iter().any(|re| re.is_match(&x.to_string_lossy())))
+                .filter(|x| {
+                    !regexes
+                        .iter()
+                        .any(|re| re.is_match(&x.to_string_normalised()))
+                })
                 .collect()
         }
         None => files_all,
@@ -102,7 +110,7 @@ fn main() {
             println!(
                 "{} files processed.\n'{}' checksum: {file_hash:X}",
                 total_files,
-                save_path.file_name().unwrap_or_default().to_string_lossy()
+                save_path.file_name().unwrap_or_default().to_string_normalised()
             );
         }
         data::enums::UserAction::XXH3 => {
@@ -116,7 +124,7 @@ fn main() {
             println!(
                 "{} files processed.\n'{}' checksum: {file_hash:X}",
                 total_files,
-                save_path.file_name().unwrap_or_default().to_string_lossy()
+                save_path.file_name().unwrap_or_default().to_string_normalised()
             );
         }
         data::enums::UserAction::Check => {
@@ -177,7 +185,7 @@ fn main() {
                 &hasher_file
                     .file_name()
                     .unwrap_or_default()
-                    .to_string_lossy(),
+                    .to_string_normalised(),
                 count = invalid_count
             );
             if invalid_count > 0 {
