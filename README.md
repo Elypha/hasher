@@ -37,7 +37,8 @@ hasher -e '\.log$' xxh3 src
 Example usage:
 
 ```bash
-# calculate hashes for all files in the current directory (this repo), excluding .log files and .git and target directories
+# calculate hashes for all files in the current directory (this repo) but exclude
+# .log files and .git and target directories
 hasher xxh3 -e '.+\.log$' -e /\.git/ -e "(/|^)target/"
 # > 10 files processed.
 # > 'XXH3.hasher' checksum: 4A5A9A2997E68875
@@ -48,6 +49,7 @@ tail xxh3.hasher
 # > XXH3:2D06800538D394C2,src/test.rs
 # > XXH3:B58677E3B5190C33,src/utils/helper.rs
 
+# check the integrity of the files in the current directory against .hasher file
 hasher check
 # > README.md: expected F596FDAEA81A39CC, found 3016CA6821596A7F
 # > 1 invalid files.
