@@ -2,6 +2,7 @@ use crate::data;
 use crate::tasks;
 use glob::glob;
 use regex::Regex;
+use std::ffi::OsStr;
 use std::fs::File;
 use std::io::Write;
 use std::path::Path;
@@ -24,7 +25,7 @@ impl ToStringNormalised for Path {
         self.to_string_lossy().replace("\\", "/")
     }
 }
-impl ToStringNormalised for std::ffi::os_str::OsStr {
+impl ToStringNormalised for OsStr {
     fn to_string_normalised(&self) -> String {
         // always uses `/` instead of `\`
         self.to_string_lossy().replace("\\", "/")
