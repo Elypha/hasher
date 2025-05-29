@@ -13,9 +13,9 @@ pub enum UserAction {
 impl fmt::Display for UserAction {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            UserAction::Size => write!(f, "Size"),
-            UserAction::Check => write!(f, "Check"),
-            UserAction::XXH3 => write!(f, "XXH3"),
+            UserAction::Size => write!(f, "size"),
+            UserAction::Check => write!(f, "check"),
+            UserAction::XXH3 => write!(f, "xxh3"),
             // UserAction::SHA256 => write!(f, "SHA256"),
             // UserAction::MD5 => write!(f, "MD5"),
         }
