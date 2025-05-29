@@ -2,6 +2,8 @@
 
 A command-line tool designed to verify the integrity of files within a directory by calculating and comparing their cryptographic hashes (checksums).
 
+[![Rust](https://github.com/Elypha/hasher/actions/workflows/rust.yml/badge.svg)](https://github.com/Elypha/hasher/actions/workflows/rust.yml)
+
 ## Purpose
 
 This is particularly useful for ensuring data integrity after unreliable transfer processes. It generates a record of file hashes, which can be used for check at a later time.
