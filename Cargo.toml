@@ -13,3 +13,6 @@ rayon = "1.10.0"
 regex = "1.11.1"
 sha2 = "0.10.9"
 xxhash-rust = { version = "0.8.15", features = ["std", "xxh3"] }
+
+[profile.release]
+strip = "symbols"
