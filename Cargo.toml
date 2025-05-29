@@ -5,7 +5,7 @@ edition = "2024"
 
 [dependencies]
 bytesize = "2.0.1"
-clap = { version = "4.5.39", features = ["derive", "unicode"] }
+clap = { version = "4.5.39", features = ["derive", "unicode", "wrap_help"] }
 glob = "0.3.2"
 hex = "0.4.3"
 md5 = "0.7.0"

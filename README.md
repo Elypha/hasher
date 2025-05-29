@@ -17,10 +17,12 @@ Usage: hasher.exe [OPTIONS] <ACTION> [PATH]
 
 Arguments:
   <ACTION>  The action to perform. Valid values are: size, xxh3, check
-  [PATH]    The path to the directory to process. If not provided, the current working directory is used
+  [PATH]    The path to the directory to process. If not provided, the current working directory is
+            used
 
 Options:
-  -e, --exclude <EXCLUDE>  A list of regex patterns to exclude files from processing. Can be specified multiple times and evaluated to true if any pattern matches
+  -e, --exclude <EXCLUDE>  A list of regex patterns to exclude files from processing. Can be
+                           specified multiple times and evaluated to true if any pattern matches
   -h, --help               Print help
   -V, --version            Print version
 ```
